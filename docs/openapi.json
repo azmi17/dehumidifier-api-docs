@@ -1,21 +1,20 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Dehumidifier App API",
-    "version": "1.0RC1",
+    "title": "Dehumidifier API",
+    "version": "1.0Rc1",
     "description": "API specification for the Dehumidifier Application, covering authentication, account management, project and quotation workflows, product and technical data management, flow system configuration, and dehumidifier calculation services."
   },
   "servers": [
     {
-      "url": "https://api.example.com",
-      "description": "Production"
-    },
-    {
-      "url": "http://localhost:8080",
-      "description": "Local"
+      "url": "https://dehumidifier-api.ldpgroup.co.id",
+      "description": "Devel Environment"
     }
   ],
   "tags": [
+    {
+      "name" : "Version"
+    },
     {
       "name": "Auth"
     },
@@ -62,6 +61,26 @@
     }
   ],
   "paths": {
+      "/api/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Get API version",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/login": {
       "post": {
         "tags": [
@@ -6104,6 +6123,39 @@
       }
     },
     "schemas": {
+      "VersionResponse": {
+        "type": "object",
+        "description": "Response schema for API version information",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Short description of the API",
+            "example": "Dehumidifier API"
+          },
+          "last_build": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the last build in YYYY-MM-DD format",
+            "example": "2026-04-20"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name of the API engine",
+            "example": "Dehumidifier Engine"
+          },
+          "version": {
+            "type": "string",
+            "description": "Current version identifier of the API",
+            "example": "1.0Rc1"
+          }
+        },
+        "required": [
+          "description",
+          "last_build",
+          "name",
+          "version"
+        ]
+      },
       "BaseSuccessResponse": {
         "type": "object",
         "properties": {
