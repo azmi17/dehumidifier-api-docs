@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Dehumidifier API",
-    "version": "1.0Rc1",
+    "version": "1.0RC1",
     "description": "API specification for the Dehumidifier Application, covering authentication, account management, project and quotation workflows, product and technical data management, flow system configuration, and dehumidifier calculation services."
   },
   "servers": [
@@ -96,7 +96,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Testing only. Access token expiry in seconds. Refresh token expiry will be access token ttl x 2."
+            "description": "Testing only. Access token expiry in seconds. Refresh token expiry will be access token TTL x 2."
           }
         ],
         "requestBody": {
