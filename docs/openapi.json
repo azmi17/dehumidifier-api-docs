@@ -2,13 +2,17 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Dehumidifier App API",
-    "version": "1.0Rc1",
+    "version": "1.0RC1",
     "description": "API specification for the Dehumidifier Application, covering authentication, account management, project and quotation workflows, product and technical data management, flow system configuration, and dehumidifier calculation services."
   },
   "servers": [
     {
-      "url": "https://dehumidifier-api.ldpgroup.co.id",
-      "description": "Development"
+      "url": "https://api.example.com",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "Local"
     }
   ],
   "tags": [
@@ -50,9 +54,6 @@
     },
     {
       "name": "Account"
-    },
-    {
-      "name": "Version"
     }
   ],
   "security": [
@@ -61,75 +62,6 @@
     }
   ],
   "paths": {
-    "/api/version": {
-      "get": {
-        "tags": [
-          "Version"
-        ],
-        "summary": "Get API version",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VersionResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "422": {
-            "$ref": "#/components/responses/ValidationError"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          },
-          "400": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/auth/login": {
       "post": {
         "tags": [
@@ -6332,6 +6264,7 @@
           },
           "role": {
             "type": "string",
+            "description": "Accepted values: user, owner, admin. Value will be normalized to lower-case by the backend.",
             "enum": [
               "admin",
               "user",
@@ -6357,6 +6290,7 @@
           },
           "role": {
             "type": "string",
+            "description": "Accepted values: user, owner, admin. Value will be normalized to lower-case by the backend.",
             "enum": [
               "admin",
               "user",
@@ -6431,39 +6365,6 @@
               }
             }
           }
-        ]
-      },
-      "VersionResponse": {
-        "type": "object",
-        "description": "Response schema for API version information",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Short description of the API",
-            "example": "Dehumidifier Calculation API"
-          },
-          "last_build": {
-            "type": "string",
-            "format": "date",
-            "description": "Date of the last build in YYYY-MM-DD format",
-            "example": "2026-04-20"
-          },
-          "name": {
-            "type": "string",
-            "description": "Full name of the API engine",
-            "example": "Dehumidifier Calculation Engine"
-          },
-          "version": {
-            "type": "string",
-            "description": "Current version identifier of the API",
-            "example": "1.0RC1"
-          }
-        },
-        "required": [
-          "description",
-          "last_build",
-          "name",
-          "version"
         ]
       },
       "LoginRequest": {
